@@ -59,7 +59,7 @@ var bot = controller.spawn({
 insulter = new insult();
 
 
-controller.hears(['insult ([^\s]*)'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['insult ([^\\s]*)'], 'direct_message,direct_mention,mention', function(bot, message) {
 
     bot.api.reactions.add({
         timestamp: message.ts,
