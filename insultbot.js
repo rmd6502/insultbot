@@ -73,8 +73,25 @@ controller.hears(['insult ([^\\s]*)'], 'direct_message,direct_mention,mention', 
 
 
     var userName = bot.user_info[message.user].name;
-    if (message.match && message.match[1] !== 'me') {
-        userName = message.match[1];
+    if (message.match) {
+        switch (message.match[1]) {
+            case 'me': break;
+            case 'yourself': 
+                bot.identifyBot((err, botData) => {
+                    userName = botData.name;
+                    bot.reply(message, userName + ', ' + insulter.generateInsult());
+                });
+                return;
+            case 'donald trump':
+            case 'trump':
+            case 'Donald Trump':
+            case 'Trump':
+                bot.reply(message, 'There are some things even a bot won\'t do.');
+                return;
+            default:
+                userName = message.match[1];
+                break;
+        }
     }
     bot.reply(message, userName + ', ' + insulter.generateInsult());
 });
