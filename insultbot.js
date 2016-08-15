@@ -44,7 +44,7 @@ if (!process.env.token) {
     process.exit(1);
 }
 
-var Botkit = require('Botkit');
+var Botkit = require('botkit');
 var os = require('os');
 var insult = require('./insult.js');
 
